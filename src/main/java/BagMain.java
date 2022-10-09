@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 /* This file contains a few exercises and TODOs for you to fill.
  * Make sure you do the TODOs in Bag.java, HandBag.java and CrossbodyBag.java
  * as the tasks in this file depends on the completion on those!
@@ -16,6 +18,11 @@ class BagMain {
      */
     public static void enhanceBags(Bag[] bags, boolean double_enhance_handbags) {
         // TODO: Implement this.
+        for (Bag i : bags) { i.enhance(); }
+        if(double_enhance_handbags)
+        {
+            for (Bag i : bags) { if (i instanceof HandBag) { i.enhance(); } }
+        }
     }
 
     /**
@@ -29,5 +36,14 @@ class BagMain {
      */
     public static int countCrossbodyStraps(Bag[] bags) {
         // TODO: Implement this.
+        int answer = 0;
+        for (Bag i : bags)
+        {
+            if (i instanceof CrossbodyBag)
+            {
+                answer += ((CrossbodyBag) i).getNumberOfStraps();
+            }
+        }
+        return answer;
     }
 }

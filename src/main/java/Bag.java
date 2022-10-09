@@ -5,6 +5,8 @@
  * 1. Introduction to Java helpful.
  */
 
+import static org.junit.Assert.assertEquals;
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -14,8 +16,10 @@ public abstract class Bag {
      *       - an array of Strings named contents
      */
 
-
-
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
     /*
      * TODO: Create a constructor that takes two arguments:
@@ -27,8 +31,13 @@ public abstract class Bag {
      * its contents.)
      */
 
-
-
+    public Bag(String color, int capacity)
+    {
+        this.color = color;
+        this.capacity = capacity;
+        this.numberOfContents = 0;
+        this.contents = new String[this.capacity];
+    }
 
     /*
      * TODO: Create a variety of 'getter' functions.
@@ -38,17 +47,20 @@ public abstract class Bag {
      *           - getCapacity
      */
 
-
-
+    public String getColor() { return this.color; }
+    public int getNumberOfContents() { return this.numberOfContents; }
+    public int getCapacity() { return this.capacity; }
 
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
-
-
+    public void setColor(String col)
+    {
+        this.color = col;
+        return;
+    }
 
     /*
      * TODO: Create a method called addItem that takes in a String
@@ -61,9 +73,15 @@ public abstract class Bag {
      *       and false otherwise.
      */
 
-
-
-
+    public boolean addItem(String it)
+    {
+        if (this.getCapacity() > this.getNumberOfContents()) {
+            this.contents[this.getNumberOfContents()] = it;
+            this.numberOfContents += 1;
+            return true;
+        }
+        return false;
+    }
 
     /**
      * TODO: Create a method called popItem that returns a String.
@@ -76,9 +94,12 @@ public abstract class Bag {
      * @return
      */
 
-
-
-
+    public String popItem()
+    {
+        if (this.numberOfContents == 0) return null;
+        this.numberOfContents -= 1;
+        return this.contents[this.numberOfContents];
+    }
 
     /**
      * Increase this bag's capacity by n.
@@ -87,7 +108,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        this.capacity = this.capacity + n;
     }
 
     /**
@@ -114,4 +135,5 @@ public abstract class Bag {
      * We recommend you look at HandBag.java first.
      */
     public abstract void enhance();
+
 }
